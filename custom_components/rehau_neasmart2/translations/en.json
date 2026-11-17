@@ -1,0 +1,126 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Rehau NEA SMART 2.0 (SYSBUS)",
+        "description": "Home Assistant acts as the REHAU KNX gateway (Modbus slave 240/241). Configure the RS485-to-TCP converter as TCP client to this Home Assistant and the port below (38400 baud, 8N1).",
+        "data": {
+          "climate_system_name": "System identifier",
+          "listen_port": "TCP port"
+        }
+      },
+      "topology": {
+        "title": "Installation",
+        "description": "Seen on the bus: {detected}.",
+        "data": {
+          "zones": "Zones (base.zone:name, comma separated)",
+          "mixed_groups": "Mixed groups (0-3)",
+          "pumps_regs_mapping": "Extra pumps (e.g. 1,2)",
+          "dehumidificators_regs_mapping": "Dehumidifiers (e.g. 1)",
+          "restore_globals": "Re-send last global mode/state after a restart",
+          "stale_after_seconds": "Unavailable after this many seconds without data"
+        },
+        "data_description": {
+          "zones": "Detected zones are pre-filled with generic names; rename them here or later in the device page.",
+          "restore_globals": "The base rarely republishes the global mode/state. Enable only if Home Assistant is the only place where you change them: otherwise a change made in the REHAU app while Home Assistant was down would be undone."
+        }
+      }
+    },
+    "progress": {
+      "discover": "Listening on port {port} for the REHAU base (up to 90 s). The converter may take a few seconds to reconnect."
+    },
+    "error": {
+      "invalid_zones": "Invalid zones. Use base.zone:name, e.g. 1.5:Living room",
+      "invalid_index": "Invalid list of numbers",
+      "port_in_use": "Port already in use (is the old add-on still running?)"
+    },
+    "abort": {
+      "already_configured": "This system is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Rehau NEA SMART 2.0",
+        "description": "Seen on the bus: {detected}.",
+        "data": {
+          "listen_port": "TCP port",
+          "zones": "Zones (base.zone:name, comma separated)",
+          "mixed_groups": "Mixed groups (0-3)",
+          "pumps_regs_mapping": "Extra pumps (e.g. 1,2)",
+          "dehumidificators_regs_mapping": "Dehumidifiers (e.g. 1)",
+          "restore_globals": "Re-send last global mode/state after a restart",
+          "stale_after_seconds": "Unavailable after this many seconds without data"
+        },
+        "data_description": {
+          "zones": "Detected zones are pre-filled with generic names; rename them here or later in the device page.",
+          "restore_globals": "The base rarely republishes the global mode/state. Enable only if Home Assistant is the only place where you change them: otherwise a change made in the REHAU app while Home Assistant was down would be undone."
+        }
+      }
+    },
+    "error": {
+      "invalid_zones": "Invalid zones. Use base.zone:name, e.g. 1.5:Living room",
+      "invalid_index": "Invalid list of numbers",
+      "port_in_use": "Port already in use (is the old add-on still running?)"
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "sysbus": {
+        "name": "SYSBUS connection"
+      }
+    },
+    "select": {
+      "global_climate_mode": {
+        "name": "Global climate mode"
+      },
+      "global_climate_state": {
+        "name": "Global climate state"
+      }
+    },
+    "sensor": {
+      "outside_temperature": {
+        "name": "Outside temperature"
+      },
+      "filtered_outside_temperature": {
+        "name": "Filtered outside temperature"
+      },
+      "errors": {
+        "name": "Errors"
+      },
+      "warnings": {
+        "name": "Warnings"
+      },
+      "hints": {
+        "name": "Hints"
+      },
+      "valve_opening": {
+        "name": "Valve opening"
+      },
+      "pump_state": {
+        "name": "Pump"
+      },
+      "flow_temperature": {
+        "name": "Flow temperature"
+      },
+      "return_temperature": {
+        "name": "Return temperature"
+      },
+      "extra_pump_state": {
+        "name": "Pump {n}"
+      },
+      "dehumidifier_state": {
+        "name": "Dehumidifier {n}"
+      },
+      "zone_temperature": {
+        "name": "Temperature"
+      },
+      "zone_humidity": {
+        "name": "Humidity"
+      },
+      "zone_register_3": {
+        "name": "Register N+3"
+      }
+    }
+  }
+}
